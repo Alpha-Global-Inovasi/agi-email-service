@@ -1,6 +1,6 @@
 [package]
 name = "cf-email"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "Email library for Rust services, with SMTP and mock providers and Handlebars templates"
 license = "MIT"

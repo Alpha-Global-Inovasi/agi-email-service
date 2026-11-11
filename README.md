@@ -6,7 +6,7 @@ Email library for Rust services, with SMTP and mock providers and Handlebars tem
 
 ```toml
 [dependencies]
-cf-email = { git = "https://github.com/Crypto-Foundation-Dev/cf-email.git", tag = "v0.1.0" }
+cf-email = { git = "https://github.com/Crypto-Foundation-Dev/cf-email.git", tag = "v0.1.1" }
 ```
 
 ## Environment Variables
@@ -20,7 +20,7 @@ cf-email = { git = "https://github.com/Crypto-Foundation-Dev/cf-email.git", tag 
 | `SMTP_PORT`          | When using SMTP    | SMTP port                                         |
 | `SMTP_USERNAME`      | No                 | SMTP username                                     |
 | `SMTP_PASSWORD`      | No                 | SMTP password                                     |
-| `SMTP_USE_TLS`       | No                 | `true` (default) for STARTTLS, otherwise plaintext |
+| `SMTP_USE_TLS`       | No                 | `true` (default) for TLS: implicit TLS on port 465, STARTTLS on any other port. Otherwise plaintext |
 
 ## Usage
 

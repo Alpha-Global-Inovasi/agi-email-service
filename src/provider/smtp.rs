@@ -23,7 +23,14 @@ impl SmtpProvider {
     ) -> Result<Self, EmailError> {
         let creds = Credentials::new(config.username, config.password);
 
-        let transport_builder = if config.use_tls {
+        let transport_builder = if config.use_tls && config.port == 465 {
+            // Implicit TLS (SMTPS): TLS from the first byte, no STARTTLS (port 465)
+            AsyncSmtpTransport::<Tokio1Executor>::relay(&config.host)
+                .map_err(|e| EmailError::ConfigError(e.to_string()))?
+                .port(config.port)
+                .credentials(creds)
+                .authentication(vec![Mechanism::Login, Mechanism::Plain])
+        } else if config.use_tls {
             // STARTTLS: connect plain, then upgrade to TLS (port 587)
             AsyncSmtpTransport::<Tokio1Executor>::starttls_relay(&config.host)
                 .map_err(|e| EmailError::ConfigError(e.to_string()))?
